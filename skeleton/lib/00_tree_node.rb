@@ -46,14 +46,14 @@ class PolyTreeNode
     nil
   end
 
-  def bfs(target)
-    queue = [self.first]
-    until queue.empty?
-      removal = queue.shift
-      return removal if removal.value == target
-      removal.children.each do |child|
+  def bfs(target) 
+    queue = [self] 
+    until queue.empty? 
+      removal = queue.shift 
+      removal.children.each do |child| 
         queue.push(child)
-      end
+      end 
+      return removal if removal.value == target
     end
     nil
   end
