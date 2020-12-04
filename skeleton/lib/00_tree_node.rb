@@ -37,7 +37,26 @@ class PolyTreeNode
     child.parent = self
   end
 
-  
+  def dfs(target)
+    return self if self.value == target #"a".dfs("d")
+    self.children.each do |child| # ["b", "c"] "c" ["d", 'e']
+      result = child.dfs(target) # "c".dfs("d") => "d".dfs("d") = "d" => c.dfs("d") = "d"
+      return result unless result == nil #d 
+    end
+    nil
+  end
+
+  def bfs(target)
+    queue = [self.first]
+    until queue.empty?
+      removal = queue.shift
+      return removal if removal.value == target
+      removal.children.each do |child|
+        queue.push(child)
+      end
+    end
+    nil
+  end
 
 
 end
