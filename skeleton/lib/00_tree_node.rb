@@ -12,26 +12,18 @@ class PolyTreeNode
       @parent = node
     else
       if !@parent.nil?
-        @parent.children.delete(self) 
+        # a children: b, c, d
+        # d, new parent: i, 
+        # a chidren: b, c
+        @parent.children.delete(self) #@parent d.parent = a.children [b, c, d] .delete(d) => a.children = [b, c]
         @parent = node
-        node.children << self.value
+        node.children << self
       else
         @parent = node
-        node.children << self.value
+        node.children << self
       end
     end
-
-    # if node == nil
-    #   self.parent = node
-    # else
-    #   if !self.parent.nil?
-    #     self.parent.children.delete(self) 
-    #     self.parent = node
-    #     node.children << self.value
-    #   else
-    #     self.parent = node
-    #     node.children << self.value
-    #   end
-    # end
   end
+
+
 end
