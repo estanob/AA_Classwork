@@ -1,7 +1,7 @@
 require_relative 'tic_tac_toe'
 
 class TicTacToeNode
-  attr_reader :board, :next_mover_mark
+  attr_reader :board, :next_mover_mark, :prev_move_pos
 
   def initialize(board, next_mover_mark, prev_move_pos = nil)
     @board = board
@@ -22,7 +22,16 @@ class TicTacToeNode
   # the current move.
   def children
     children = []
-    
+    node.board.each do |space|
+      if space.empty?
+        node = TicTacToeNode.new(@board.dup, :o, @prev_move_pos)
+        children << node
+      end
+    end
+    # 9.times do 
+    #   node = TicTacToeNode.new(@board.dup, :o, @prev_move_pos)
+    #   children << node
+    # end
 
     children
   end
