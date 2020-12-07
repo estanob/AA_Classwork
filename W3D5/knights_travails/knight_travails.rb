@@ -1,25 +1,27 @@
 require_relative "../skeleton/lib/00_tree_node" #./skeleton/lib/00_tree_node.rb
 class KnightPathFinder
   
+  attr_reader :considered_positions
+
   def self.valid_moves(pos)
-    @considered_positions = [pos]
-    #possible_moves = []
+    possible_moves = []
     moves = [[-1, -2], [-2, -1], [-2, 1], [-1, 2], [1, 2], [1, -2], [2, -1], [2, 1]]
     moves.each do |move|
       move_pos = [move[0] + pos[0], move[1] + pos[1]]
       #[-1, -2] [0, 0] move[0] + pos[0]       move[1] + pos[1]
       if move_pos[0] >= 0 && move_pos[0] < 8 && move_pos[1] >= 0 && move_pos[1] < 8
         #@considered_positions.push(move_pos)
-        #possible_moves.push(move_pos)
+        possible_moves.push(move_pos)
       end
     end
-    #possible_moves [[3,2], [2,3], ...]
+    possible_moves
   end
 
   def initialize(starting_pos)
     @starting_pos = starting_pos
     @root_node = PolyTreeNode.new(starting_pos)
     @board = Array.new(8) {Array.new(8,"-")}
+    @considered_positions = [starting_pos]
     self.build_move_tree(starting_pos)
     #    0 1 2 3 4 5 6 7
     #  0 
@@ -33,17 +35,31 @@ class KnightPathFinder
   end
 
   def build_move_tree(pos)
-
+    #call new_move_positions
   end
 
   def new_move_positions(pos)
-    if !@considered_positions.include?(pos)
-      #possible_moves = KnightPathFinder.valid_moves(pos)
-      @considered_positions.push(pos)
+    new_moves = []
+    possible_new_moves = KnightPathFinder.valid_moves(pos)
+    possible_new_moves.each do |move|
+      if !@considered_positions.include?(move)
+        @considered_positions << move
+        new_moves << move
+      end
     end
-    pos
+    new_moves
+    # if !@considered_positions.include?(pos)
+
+    #   possible_moves = KnightPathFinder.valid_moves(pos)
+    #   @considered_positions.push(pos)
+    # end
+    # @considered_positions
+    #add new moves to considered positions (no duplicates)
+    #return those new moves
   end
 
 end
 
 p new_game = KnightPathFinder.new([0,0])
+p new_game.new_move_positions([1,2])
+p new_game.considered_positions
