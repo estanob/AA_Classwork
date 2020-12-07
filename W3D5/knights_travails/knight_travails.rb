@@ -1,4 +1,5 @@
 require_relative "../skeleton/lib/00_tree_node" #./skeleton/lib/00_tree_node.rb
+require "byebug"
 class KnightPathFinder
   
   attr_reader :considered_positions
@@ -36,6 +37,20 @@ class KnightPathFinder
 
   def build_move_tree(pos)
     #call new_move_positions
+    root_node = PolyTreeNode.new(@starting_pos)
+    queue = [root_node]
+    # debugger
+    until queue.empty?
+      first = queue.shift
+      new_moves = new_move_positions(first.value)
+      new_moves.each do |move|
+        # debugger
+        new_node = PolyTreeNode.new(move)
+        first.add_child(new_node)
+        queue << new_node
+      end
+    end
+    root_node
   end
 
   def new_move_positions(pos)
@@ -60,6 +75,11 @@ class KnightPathFinder
 
 end
 
+p "new game"
 p new_game = KnightPathFinder.new([0,0])
+p "first move"
 p new_game.new_move_positions([1,2])
+p "considered positions: "
 p new_game.considered_positions
+p "move tree"
+p new_game.build_move_tree([1,2])
