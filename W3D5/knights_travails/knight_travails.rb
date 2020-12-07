@@ -78,7 +78,16 @@ class KnightPathFinder
   end
 
   def trace_path_back(end_node)
-    arr = []
+    arr =[end_node.value]
+
+    current_node = end_node
+
+    until current_node.parent.nil?
+      arr.unshift(current_node.parent.value)
+      current_node = current_node.parent
+    end
+    # arr.unshift(@root_node.value)
+    arr
   end
 
 end
@@ -93,6 +102,5 @@ p new_game = KnightPathFinder.new([0,0])
 p "----------"
 # p new_game.build_move_tree
 # p new_game.considered_positions.length
-p new_game.find_path([7,6]).value
-# p new_game.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
-# p new_game.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
+p new_game.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+p new_game.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
