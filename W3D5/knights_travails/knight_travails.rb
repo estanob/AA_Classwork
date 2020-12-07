@@ -23,7 +23,7 @@ class KnightPathFinder
     @root_node = PolyTreeNode.new(starting_pos)
     @board = Array.new(8) {Array.new(8,"-")}
     @considered_positions = [starting_pos]
-    self.build_move_tree(starting_pos)
+    self.build_move_tree
     #    0 1 2 3 4 5 6 7
     #  0 
     #  1
@@ -35,7 +35,7 @@ class KnightPathFinder
     #  7
   end
 
-  def build_move_tree(pos)
+  def build_move_tree
     #call new_move_positions
     queue = [@root_node]
     # debugger
@@ -49,7 +49,7 @@ class KnightPathFinder
         queue << new_node
       end
     end
-    @root_node
+    # @root_node
   end
 
   def new_move_positions(pos)
@@ -72,13 +72,27 @@ class KnightPathFinder
     #return those new moves
   end
 
+  def find_path(end_pos)
+    end_node = @root_node.bfs(end_pos)
+    trace_path_back(end_node)
+  end
+
+  def trace_path_back(end_node)
+    arr = []
+  end
+
 end
 
-p "new game"
+# p "new game"
 p new_game = KnightPathFinder.new([0,0])
-p "first move"
-p new_game.new_move_positions([1,2])
-p "considered positions: "
-p new_game.considered_positions
-p "move tree"
-p new_game.build_move_tree([1,2])
+# p "first move"
+# p new_game.new_move_positions([1,2])
+# p "considered positions: "
+# p new_game.considered_positions
+# p "move tree"
+p "----------"
+# p new_game.build_move_tree
+# p new_game.considered_positions.length
+p new_game.find_path([7,6]).value
+# p new_game.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+# p new_game.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
