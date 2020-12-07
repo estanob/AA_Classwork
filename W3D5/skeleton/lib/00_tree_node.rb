@@ -58,5 +58,8 @@ class PolyTreeNode
     nil
   end
 
+  # def inspect
+  #   "Tree node: #{object_id} - pos: #{value} - child: #{children}"
+  # end
 
 end
