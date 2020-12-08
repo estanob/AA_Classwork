@@ -13,6 +13,7 @@ class TicTacToeNode
   end
 
   def losing_node?(evaluator)
+    return true if @board.over? && @board.winner != evaluator
   end
 
   def winning_node?(evaluator)
@@ -22,17 +23,16 @@ class TicTacToeNode
   # the current move.
   def children
     children = [] 
-    @board.rows.each do |row|
-      row.each do |space|
-          node = TicTacToeNode.new(@board.dup, :o, :x)
+    @board.rows.each_with_index do |row, idx_1|
+      row.each_with_index do |space, idx_2|
+        pair = [idx_1, idx_2]
+        if @board.empty?(pair)
+          @board[pair] = :x
+          node = TicTacToeNode.new(@board.dup, :o, pair)
           children << node
+        end
       end
     end
-    # 9.times do 
-    #   node = TicTacToeNode.new(@board.dup, :o, @prev_move_pos)
-    #   children << node
-    # end
-
     children
   end
 end
