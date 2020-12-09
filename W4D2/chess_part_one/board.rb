@@ -11,15 +11,39 @@ class Board
       end
     end
   end
+  
+  def [](pos) # => [pos]
+    row, col = pos[0], pos[1]
+    @board[row][col]
+  end
+
+  def []=(pos, value)
+    row, col = pos[0], pos[1]
+    @board[row][col] = value
+  end
+
+  def valid_move?(starting_pos, end_pos)
+    # [2, 3] => [5, 6] => false
+    # [+3, +3] [+-2, +-1] OR [+-1, +-2]
+
+    #for now can only move forward 1 space
+    #[1,1] => [1, 2] => true
+    end_pos[0] == starting_pos[0] + 1 
+  end
 
   def move_piece(starting_pos, end_pos)
-    if @board[starting_pos].is_a?(NullPiece)
+    if [starting_pos].is_a?(NullPiece)
+    # if @board[starting_pos].is_a?(NullPiece)
       raise "There is no piece at this starting position"
-    elsif !valid_move?
+    elsif !valid_move?(starting_pos, end_pos)
       raise "You cannot move to that end position" 
-    else
+    else #valid move
       p "You have moved your piece from #{starting_pos} to #{end_pos}"
       # remove piece from starting_pos, add_pice to end_pos
+      [end_pos] = [starting_pos]
+      [starting_pos] = NullPiece.new
+      # @board[end_pos] = @board[starting_pos]
+      # @board[starting_pos] = NullPiece.new
       return true
     end
     
@@ -27,6 +51,10 @@ class Board
 end
 
 b = Board.new
-p b
-# b.move_piece([1, 0], [2, 0])
+p b[[1,0]]
+p b[[2,0]]
+p "check if the move worked"
+b.move_piece([1, 0], [2, 0])
+p b[[1,0]]
+p b[[2,0]]
 # @board[[1, 0]]
