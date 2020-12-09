@@ -1,16 +1,16 @@
-require_relative "piece.rb"
-require_relative "nullpiece.rb"
+require_relative "piece"
+require_relative "nullpiece"
 
 class Board
   attr_accessor :board
   
   def initialize
-    @board = Array.new(8) { Array.new(8) { Piece.new } }
-    @board[2..5].each_with_index do |row, idx_1| 
-      row.each_with_index do |el, idx_2|
-        @board[idx_1 + 2][idx_2] = NullPiece.new
-      end
-    end
+    @board = Array.new(8) { Array.new(8) { NullPiece.new } }
+    # @board[2..5].each_with_index do |row, idx_1| 
+    #   row.each_with_index do |el, idx_2|
+    #     @board[idx_1 + 2][idx_2] = NullPiece.new
+    #   end
+    # end
   end
   
   def [](pos) # => [pos]
@@ -58,10 +58,14 @@ class Board
 end
 
 b = Board.new
-p b[[1,0]]
-p b[[2,0]]
-p "check if the move worked"
-b.move_piece([2, 0], [2, 0])
-p b[[1,0]]
-p b[[2,0]]
+# p b[[1,0]]
+# p b[[2,0]]
+# p "check if the move worked"
+# b.move_piece([2, 0], [2, 0])
+# p b[[1,0]]
+# p b[[2,0]]
 # @board[[1, 0]]
+new_rook = Rook.new(:w, b, [0,0])
+p new_rook
+p "-----------------"
+p b
