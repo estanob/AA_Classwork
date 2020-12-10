@@ -1,11 +1,12 @@
 require_relative "piece"
 require_relative "nullpiece"
+require "byebug"
 
 class Board
   attr_accessor :board
   
   def initialize
-    @board = Array.new(8) { Array.new(8) { NullPiece.new } }
+    @board = Array.new(8) { Array.new(8) { NullPiece.instance } }
     # @board[2..5].each_with_index do |row, idx_1| 
     #   row.each_with_index do |el, idx_2|
     #     @board[idx_1 + 2][idx_2] = NullPiece.new
@@ -67,5 +68,14 @@ b = Board.new
 # @board[[1, 0]]
 new_rook = Rook.new(:w, b, [0,0])
 p new_rook
+new_bishop = Bishop.new(:w, b, [1, 2])
 p "-----------------"
 p b
+
+# p new_bishop.move_dirs(new_bishop.pos)
+p new_bishop.pos
+p "bishop new moves:"
+p new_bishop.moves
+new_queen = Queen.new(:b, b, [7, 3])
+p "Queen new moves:"
+p new_queen.moves
