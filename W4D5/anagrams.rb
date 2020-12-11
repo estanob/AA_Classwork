@@ -14,7 +14,8 @@ def anagram?(str1, str2)
 
 end
 
-# Phase I: O(n!)
+# Phase I: O(n * n!) time
+# O(n!) space
 
 
 # p anagram?("gizmo", "sally")    #=> false
@@ -26,7 +27,7 @@ def second_anagram?(str1, str2)
     if arr.include?(char)                #n
       # turn str2 into arr
       #iterate str1 w char & idx
-      idx_char = arr.find_index(char) #maybe n
+      idx_char = arr.find_index(char) #also n, but not nested
       arr[idx_char] = ""
     else
       return false
@@ -36,7 +37,8 @@ def second_anagram?(str1, str2)
   return true if final_str == ""
 end
 
-#Phase II: O(n), O(n^2), O(n^3)???
+#Phase II: O(n^2) space
+#size O(n)
 
 # p second_anagram?("gizmo", "sally")    #=> false
 # p second_anagram?("elvis", "lives")    #=> true
@@ -49,6 +51,7 @@ def third_anagram?(str1, str2)
 
 end
 # Phase III: O(n log n)
+#space: O(n)
 
 
 def fourth_anagram?(str1, str2)
@@ -60,7 +63,8 @@ def fourth_anagram?(str1, str2)
 
   hash1 == hash2
 end
-# Phase IV: O(n)
+# Phase IV: O(n) time
+#space: O(1) as str1/str2 input approaches infinity, num keys eventually stops growing
 
 
 def bonus_anagram?(str1, str2)
