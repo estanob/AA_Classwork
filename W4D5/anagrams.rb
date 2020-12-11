@@ -64,12 +64,16 @@ end
 
 
 def bonus_anagram?(str1, str2)
-  hash = Hash.new(0)
-  str1.each_char { |char| hash[char] += 1 if str2.include?(char)}
-  keys = hash.keys
-  keys.each { |key| return false if !str2.include?(key)}
+  hash1 = Hash.new(0)
 
+  str1.each_char { |char| hash1[char] += 1}     #n
+  str2.each_char { |char| hash1[char] -= 1}     #n
+
+  hash1.values.any? { |key| return false if key != 0 }  #n
+  return true
 end
+
+#3n => O(n)
 
 
 
