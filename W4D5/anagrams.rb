@@ -38,14 +38,42 @@ end
 
 #Phase II: O(n), O(n^2), O(n^3)???
 
-p second_anagram?("gizmo", "sally")    #=> false
-p second_anagram?("elvis", "lives")    #=> true
+# p second_anagram?("gizmo", "sally")    #=> false
+# p second_anagram?("elvis", "lives")    #=> true
+
+def third_anagram?(str1, str2)
+  sort_1 = str1.chars.sort.join #o(1)
+  sort_2 = str2.chars.sort.join       
+  
+  sort_1 == sort_2
+
+end
+# Phase III: O(n log n)
+
+
+def fourth_anagram?(str1, str2)
+  hash1 = Hash.new(0)
+  hash2 = Hash.new(0)
+
+  str1.each_char { |char| hash1[char] += 1}
+  str2.each_char { |char| hash2[char] += 1}
+
+  hash1 == hash2
+end
+# Phase IV: O(n)
+
+
+def bonus_anagram?(str1, str2)
+  hash = Hash.new(0)
+  str1.each_char { |char| hash[char] += 1 if str2.include?(char)}
+  keys = hash.keys
+  keys.each { |key| return false if !str2.include?(key)}
+
+end
 
 
 
-
-
-
-
-p second_anagram?("gizmo", "sally")    #=> false
-p second_anagram?("elvis", "lives")    #=> true
+p bonus_anagram?("gizmo", "sally")    #=> false
+p bonus_anagram?("elvis", "lives")    #=> true
+p bonus_anagram?("elvis", "livessssss") #=> false
+p bonus_anagram?("el", "es") #=> false
