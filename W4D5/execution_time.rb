@@ -59,9 +59,9 @@ def largest_contiguous_subsum_2(arr)
   (0...arr.length - 1).each do |i|    #n
     if check_sum == nil
       check_sum = arr[i]
-      # get nil case on first if
-    elsif check_sum == nil || check_sum < arr[i] + arr[i + 1]
-      #check if el is bigger or el & after is bigger
+    elsif check_sum < arr[i]
+      check_sum = arr[i]
+    elsif check_sum < arr[i] + arr[i+1]
       check_sum = arr[i] + arr[i + 1]
     end
     if sums == nil || sums < check_sum
