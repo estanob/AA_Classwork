@@ -1,4 +1,4 @@
-
+require "byebug"
 
 # start with i, j
 # i + j == target
@@ -38,10 +38,10 @@ def okay_two_sum?(arr, target)
       second << num
     end
   end
-
+  # debugger
   if !second.empty? && first.none? { |num| num < 0 }
     (0...first.length - 1).each do |i|
-      (0...first.length - 1).each do |j|
+      (0...first.length).each do |j|
         return true if j > i && first[i] + first[j] == target
       end
     end
@@ -54,3 +54,11 @@ end
 arr = [0, 1, 5, 7]
 p okay_two_sum?(arr, 6) # => should be true
 p okay_two_sum?(arr, 10) # => should be false
+p okay_two_sum?([0, 1, 3, 4, 5, 7, 8, 10], 7) # => should be true
+# [0, 1, 3, 4]   [5, 7, 8, 10]
+# if right.first < target
+#   left -1 + right 0
+#   left -2 + right[0]
+  # left -3  + right[0]
+  # left -2 + left -1
+#   pivot will solve: 
