@@ -50,7 +50,23 @@ module Slidable
 end
 
 module Stepable
-  
+
+  def moves
+    @moves = [] #literal moves
+    (-2..2).each do |row|
+      (-2..2).each do |col|
+        @moves << [row, col] if row.abs != col.abs && [row, col] != [0,0]
+      end
+    end
+    @moves.map do |el|
+      [el[0] + self.pos[0], el[1] + self.pos[1]]
+    end
+    @moves
+  end
+
+  def move_diffs
+
+  end
 end
 
 
@@ -100,11 +116,67 @@ class Bishop < Piece
   end
 end
 
+class Knight < Piece
+  attr_accessor :symbol
+  
+  def initialize(color, board, pos)
+    super(color, board, pos)
+    @symbol = :K
+  end
+end
+
 class Queen < Piece
   attr_accessor :symbol
   
   def initialize(color, board, pos)
     super(color, board, pos)
     @symbol = :Q
+  end
+end
+
+class Pawn < Piece
+  attr_accessor :symbol
+  
+  def initialize(color, board, pos)
+    super(color, board, pos)
+    @symbol = :P
+  end
+
+  def moves
+    @moves = []
+    (1..forward_steps).each do |el|
+      @moves << [@pos[0] + (el * forward_dir), @pos[1]]
+    end
+    @moves
+  end
+
+  private #can't call self
+  def at_start_row?
+    if @color == :w
+      return @pos[0] == 1
+    else
+      return @pos[0] == 6
+    end
+    # if true, pawn can move 2 spaces
+  end
+
+  def forward_dir # return 1 or -1
+    if @color == :w
+      return 1
+    else
+      return -1
+    end
+  end
+
+  def forward_steps
+    if at_start_row?
+      return 2
+    else
+      return 1
+    end
+  end
+
+  def side_attacks #:w @ [3,4] look at: :b [4, 3] || [4, 5] then we can move :w to spot
+    
   end
 end

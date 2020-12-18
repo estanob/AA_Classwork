@@ -70,7 +70,6 @@ new_rook = Rook.new(:w, b, [0,0])
 p new_rook
 new_bishop = Bishop.new(:w, b, [1, 2])
 p "-----------------"
-p b
 
 # p new_bishop.move_dirs(new_bishop.pos)
 p new_bishop.pos
@@ -79,3 +78,8 @@ p new_bishop.moves
 new_queen = Queen.new(:b, b, [7, 3])
 p "Queen new moves:"
 p new_queen.moves
+new_knight = Knight.new(:b, b, [4, 0])
+
+p "Knight new moves:"
+p new_knight.moves
+p b
