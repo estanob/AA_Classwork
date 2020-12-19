@@ -25,7 +25,7 @@ def vanity_projects
   # Show the movie id and title and director's name.
 
   # Note: Directors appear in the 'actors' table.
-  Movie.select(:id, :title, actors: :name).joins(:director).where('ord = 1')
+  Movie.select('id', 'title').joins(:director).joins(:actors).where('ord = 1')
 
   #actors: :name
   # # them = ['George Lucas', 'Steven Spielberg']
