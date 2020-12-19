@@ -6,7 +6,11 @@ def it_was_ok
   # We can use ranges (a..b) inside a where method.
   #
   # Find the id, title, and score of all movies with scores between 2 and 3
-  Movie.select(:id, :title, :score).where('score >= 2 AND score <= 3')
+  
+  Movie.select(:id, :title, :score).where(score: 2..3)
+
+  # Raw SQL Ver
+  # Movie.select(:id, :title, :score).where('score >= 2 AND score <= 3')
 end
 
 def harrison_ford
@@ -37,7 +41,7 @@ def biggest_cast
   #
   # Find the id and title of the 3 movies with the
   # largest casts (i.e most actors)
-  Movie.select(:id, :title).join(:castings).order('COUNT(movie_id) DESC').limit(3)
+  Movie.select(:id, :title).joins(:actors).group('movies.id').order('COUNT(actors.id) DESC').limit(3)
 end
 
 def directed_by_one_of(them)
@@ -53,6 +57,12 @@ def directed_by_one_of(them)
   #
   # Find the id and title of all the movies directed by one of 'them'.
 
+
+  # them = ['George Lucas', 'Steven Spielberg']
+  Movie.select(:id, :title).joins(:director).where(actors: {name: them})
+
+  # Raw SQL Version
+  # Movie.select(:id, :title).joins(:director).where('actors.name IN (?)', them)
 end
 
 def movie_names_before_1940
@@ -67,4 +77,5 @@ def movie_names_before_1940
   #
   # Use pluck to find the title of all movies made before 1940.
 
+  Movie.where('yr < 1940').pluck(:title)
 end
