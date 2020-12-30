@@ -1,2 +1,7 @@
 /* PHASE 1: Header */
 
+body {
+  font-weight: 500;
+  font-family: 'Open Sans';
+  font-size: 100%;
+}
