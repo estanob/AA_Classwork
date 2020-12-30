@@ -8,7 +8,7 @@ span, article, footer, time, small {
 
 }
 
-ul.ba {
+ul {  /* <= had .ba, but after removing, it removed bullets form nav bar*/
   list-style-type: none;
 }
 
