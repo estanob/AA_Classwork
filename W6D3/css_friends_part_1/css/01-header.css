@@ -6,15 +6,18 @@ body {
   font-size: 100%;
 }
 
-.header {
-
+header {
+  font-weight: 600;
+  font-size: 100%;
 }
 
 .header-nav {
-
+  font-weight: 400;
+  font-size: 100%;
 }
 
 .header-list {
-
+  font-weight: 300;
+  font-size: 90%;
 }
 
