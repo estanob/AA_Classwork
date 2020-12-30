@@ -8,12 +8,18 @@ span, article, footer, time, small {
 
 }
 
-ul {
+ul.ba {
+  list-style-type: none;
+}
 
+* {
+  box-sizing: content-box;
 }
 
 img {
-
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 input[type="password"],
@@ -22,10 +28,10 @@ input[type="text"],
 input[type="submit"],
 textarea,
 button {
-
+  cursor: pointer;
 }
 
 button,
 input[type="submit"] {
-
+  -webkit-appearance: none;
 }
