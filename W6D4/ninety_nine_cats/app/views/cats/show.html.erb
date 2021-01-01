@@ -1,0 +1,25 @@
+<!---
+<%#= render "cat", {cat: @cat} %>
+<li><a href="<%#= cats_url %>">Return to all cats</a></li>
+--->
+
+
+<table>
+  <thead>
+    <tr>
+      <th colspan = "2"><%= @cat.name %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @cat.name %>'s birthday: <%= @cat.birth_date %></td>
+      <td>fur color: <%= @cat.color %></td>
+      <td>sex: <%= @cat.sex %></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <th>About <%= @cat.name %>:</th>
+    <td><%= @cat.description %></td>
+  </tfoot>
+</table> 
+<li><a href="<%= cats_url %>">Return to all cats</a></li>

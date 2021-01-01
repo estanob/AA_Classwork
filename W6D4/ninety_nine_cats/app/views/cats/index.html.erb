@@ -1,0 +1,8 @@
+<h1>All of the cats!</h1>
+
+<% @cats.each do |cat| %>
+<ul>
+  <%= render "cat", {cat: cat} %>
+</ul>
+
+<% end %>
