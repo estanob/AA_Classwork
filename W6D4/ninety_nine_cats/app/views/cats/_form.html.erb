@@ -20,7 +20,13 @@
     <br>
 
     <label>Color:
-      <input type="text" name="cat[color]" value="<%= cat.color %>">
+      <!---<input type="text" name="cat[color]" value="<%#= cat.color %>">--->
+      <select name="cat[color]">
+        <option selected>--select a color--</option>
+        <% Cat::Cat_colors.each do |color| %>
+          <option><%= color %></option>
+        <% end %>
+      </select>
     </label>
 
     <br>
@@ -32,13 +38,18 @@
     <br>
 
     <label>Sex:
-      <input type="text" name="cat[sex]" value="<%= cat.sex %>">
+      <!---<input type="text" name="cat[sex]" value="<%#= cat.sex %>">--->
+      <!---<%#= f.radio_button :sex, 'M' %>M<br />
+      <%#= f.radio_button :sex, 'F' %>F<br />--->
+      <%= radio_button("cat", "sex", "M") %>M
+      <%= radio_button("cat", "sex", "F") %>F
     </label>
 
     <br>
 
     <label>Description:
-      <input type="text" name="cat[description]" value="<%= cat.description %>">
+      <!---<input type="text" name="cat[description]" value="<%#= cat.description %>">--->
+      <textarea name="cat[description]" cols="30" rows="5"></textarea>
     </label>
 
     <br>
