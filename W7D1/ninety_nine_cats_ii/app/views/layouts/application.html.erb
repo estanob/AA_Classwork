@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <!-- <%# if logged_in? %>
+      <h2>Welcome to 99Cats, <%#= current_user.user_name %>! </h2>
+      <form action=<%#= session_url %> method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="LOG OUT">
+      </form>
+    <%# end %> -->
     <%= yield %>
   </body>
 </html>
