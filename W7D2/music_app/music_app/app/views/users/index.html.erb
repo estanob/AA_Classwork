@@ -1,0 +1,7 @@
+<h1>Welcome to the MusicApp!</h1>
+
+<% @users.each do |user| %>
+    <ul>
+        <%= render 'user', {user: user} %>
+    </ul>
+<% end  %>

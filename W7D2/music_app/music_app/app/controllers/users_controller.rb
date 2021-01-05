@@ -1,8 +1,14 @@
 class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token
-    
+
+    def index
+        @users = User.all 
+        render :index
+    end
+
     def show
-        render json: "user"
+        @user = User.find(params[:id])
+        render :show
     end
     
     def new
