@@ -11,5 +11,10 @@
 
   <body>
     <%= yield %>
+    <% if flash[:errors] %> <!-- displaying errors if they exist -->
+      <% flash[:errors].each do |error| %>
+        <%= error %>
+      <% end %>
+    <% end %>
   </body>
 </html>
