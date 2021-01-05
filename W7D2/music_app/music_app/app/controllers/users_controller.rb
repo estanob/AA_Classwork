@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    skip_before_action :verify_authenticity_token
+    
     def new
         @user = User.new
         render :new
@@ -6,9 +8,9 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-        @user.save
-        if @user
-            
+        if @user.save
+            login(@user)
+            redirect_to user_url(@user)
         else 
             render :new
         end
