@@ -10,7 +10,19 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <h3>Welcome to our site, <%= current_user.username %></h3>
+      <form action=<%= session_url %> method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Log out">
+      </form>
+    <% else %>
+      <a href=<%= new_session_url %>>Log in!</a>
+      <a href=<%= new_user_url %>>Sign up!</a>
+    <% end %>
+    
     <%= yield %>
+    
     <% if flash[:errors] %> <!-- displaying errors if they exist -->
       <% flash[:errors].each do |error| %>
         <%= error %>
