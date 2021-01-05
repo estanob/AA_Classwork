@@ -1,0 +1,16 @@
+<% if type == :new %>
+    <% action_url = bands_url %>
+    <% button_text = "Create Band!" %>
+<% elsif type == :edit %>
+    <% action_url = band_url(band.id) %>
+    <% button_text = "Update Band!" %>
+<% end %>
+
+<form action="<%= action_url%>" method="POST">
+
+    <label >Band Name: 
+        <input type="text" name="band[name]" value="<%= band.name%>">
+    </label>
+    <br>
+    <input type="submit" value="<%= button_text%>">
+</form>
