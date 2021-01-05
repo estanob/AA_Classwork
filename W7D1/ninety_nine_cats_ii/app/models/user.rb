@@ -1,10 +1,11 @@
+require 'bcrypt'
 class User < ApplicationRecord
 
     attr_reader :password
 
-    validates :user_name, presence: true
-    validates :password_digest, presence: true
-    validates :session_token, presence: true
+    validates :user_name, :password_digest, :session_token, presence: true
+    validates :password, length: { minimum: 6 }, allow_nil: true 
+
 
     after_initialize :reset_session_token!
 
