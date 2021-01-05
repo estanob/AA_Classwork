@@ -1,17 +1,14 @@
 class CatsController < ApplicationController
-  
   def index
     @cats = Cat.all
-    # render json: cats
-    
     render :index
   end
-  
+
   def show
     @cat = Cat.find(params[:id])
     render :show
   end
-  
+
   def new
     @cat = Cat.new
     render :new
@@ -19,29 +16,25 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
-  
     if @cat.save
-    # redirect_to "/users/#{user.id}"
       redirect_to cat_url(@cat)
-    # render json: user
     else
+      flash.now[:errors] = @cat.errors.full_messages
       render :new
-    # render json: user.errors.full_messages, status: 422
     end
-
   end
 
-  def edit 
+  def edit
     @cat = Cat.find(params[:id])
     render :edit
   end
 
   def update
-    @Cat = Cat.find(params[:id])
-
-    if @cat.update(cat_params)
+    @cat = Cat.find(params[:id])
+    if @cat.update_attributes(cat_params)
       redirect_to cat_url(@cat)
     else
+      flash.now[:errors] = @cat.errors.full_messages
       render :edit
     end
   end
@@ -49,7 +42,12 @@ class CatsController < ApplicationController
   private
   
   def cat_params
-    params.require(:cat).permit(:birth_date, :color, :name, :sex, :description)
+    params.require(:cat).permit(
+      :birth_date, 
+      :color, 
+      :name, 
+      :sex, 
+      :description
+      )
   end
-
 end

@@ -33,7 +33,7 @@ Cat.create(
 
 Cat.create(
   birth_date: '2020/01/01', 
-  color: 'black', 
+  color: 'grey', 
   name: 'Jenny', 
   sex: 'F', 
   description: "Jenny was born on New Year's Day and is the little sister of Bobby and Ricky. She loves to chase the red laser around the house. Her other favorite toy is floss."

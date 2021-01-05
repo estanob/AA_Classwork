@@ -12,6 +12,7 @@ class Cat < ApplicationRecord
 
   validates :color, inclusion: Cat_colors
   validates :sex, inclusion: Sex
+  validates :birth_date, :color, :name, :sex, presence: true
   
   def age
     birthday = self.birth_date
