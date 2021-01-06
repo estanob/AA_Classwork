@@ -1,0 +1,15 @@
+<h3><%= @album.title %></h3>
+
+<ul>
+  <li>Band: <%= Band.find(album.band_id).name %></li>
+  <li>Year: <%= album.year %></li>
+  <li>
+    <% if album.live == true %>
+      <%= "Live" %>
+    <% else %>
+      <%= "Studio" %>
+    <% end %>
+  </li>
+</ul>
+
+<a href=<%= band_url(album.band_id) %>>Back to Band!</a>

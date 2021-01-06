@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
 
   def new
+    @band = Band.find(params[:band_id])
     @album = Album.new
     render :new
   end
@@ -34,7 +35,7 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:album).permit(:title, :year, :live)
+    params.require(:album).permit(:title, :year, :live, :band_id)
   end
 
 end
