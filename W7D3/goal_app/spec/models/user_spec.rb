@@ -16,11 +16,28 @@ RSpec.describe User, type: :model do
       expect(FactoryBot.build(:user).session_token).not_to be nil
     end
   end
+
+  describe '#reset_session_token!' do
+    it 'generates a new session token' do
+      user = FactoryBot.create(:user, username: 'Carlos', password: '123456')
+      old_session_token = user.session_token
+      user.reset_session_token!
+      expect(user.session_token).not_to eq(old_session_token)
+    end
+
+    it 'returns the new session token' do
+      expect(user.reset_session_token!).to eq(user.session_token)
+    end
+  end
   
   describe '#is_password?' do
-    it 'returns a boolean' do
+    it 'returns true if password is correct' do
       user = FactoryBot.create(:user, username: 'Carlos', password: '123456') #.create will add to DB
       expect(user.is_password?(user.password)).to be true
+    end
+
+    it 'returns false if password is incorrect' do
+      expect(user.is_password?('abcdef')).to be false
     end
   end
   
