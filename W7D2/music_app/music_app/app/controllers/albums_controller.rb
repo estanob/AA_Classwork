@@ -8,7 +8,6 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
-
     if @album.save
       render :show
     else
@@ -35,6 +34,9 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
+    if params[band]
+      Band.find_by(name: params[band])
+      params[album][bandid] = 
     params.require(:album).permit(:title, :year, :live, :band_id)
   end
 

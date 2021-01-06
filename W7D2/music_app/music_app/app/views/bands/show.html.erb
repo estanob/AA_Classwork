@@ -2,4 +2,8 @@
 <%= @band.name %>
 <!--- band.albums.each do |album|
 link each album to show page --->
+<h4>albums: </h4>
+<% @band.albums.each do |album| %>
+    <a href=<%= '/albums/#{album.id}'%>> <%= album.title %></a>
+<% end  %>
 <a href=<%="/bands"%>>Back to all bands</a>
