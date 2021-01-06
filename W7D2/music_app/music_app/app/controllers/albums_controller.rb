@@ -34,9 +34,11 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    if params[band]
-      Band.find_by(name: params[band])
-      params[album][bandid] = 
+    if params["band"]
+      @band = Band.find_by(name: params[:band][:name])
+      params[:album][:band_id] = @band.id
+    end
+
     params.require(:album).permit(:title, :year, :live, :band_id)
   end
 
