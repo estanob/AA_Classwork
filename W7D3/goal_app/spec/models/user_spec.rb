@@ -17,11 +17,12 @@ RSpec.describe User, type: :model do
     end
   end
   
-  
-  
-  
-  
-  
+  describe '#is_password?' do
+    it 'returns a boolean' do
+      user = FactoryBot.create(:user, username: 'Carlos', password: '123456') #.create will add to DB
+      expect(user.is_password?(user.password)).to be true
+    end
+  end
   
   describe '#password_encryption' do
     it 'does not save password to the database' do
@@ -52,12 +53,14 @@ RSpec.describe User, type: :model do
   end
 
   describe '#password=' do
-    it '' do 
-
+    it 'creates the password instace variable when signing up the user' do 
+      user = FactoryBot.create(:user, username: 'Carlos', password: '123456') #.create will add to DB
+      expect(user.password).to eq('123456')
     end
 
-    it 'creates password_digest for user using ' do 
-
+    it 'creates and returns password_digest for user using BCrypt ' do 
+      user = FactoryBot.create(:user, username: 'Carlos', password: '123456') #.create will add to DB
+      expect(user.password=('123456')).not_to eq('123456')
     end
   end
 end
