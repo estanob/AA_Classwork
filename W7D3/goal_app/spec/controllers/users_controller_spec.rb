@@ -33,8 +33,30 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST #edit' do
-    post :
+    it 'renders edit user template successfully' do
+      # User.create!(username: 'Zack', password: 'piano1')
+      get :edit, id: 1
+      expect(response).to be_success
+      expect(response).to render_template(:edit)
+    end
+  end
+  
+  describe 'GET #index' do 
+  it 'renders all users template' do
+    get :index
     expect(response).to be_success
-    expect(response).to render_template(:show)
+    expect(response).to render_template(:index)
+    end
+  end
+
+  describe 'POST #create' do
+    context 'when given valid params' do 
+      it 'logs in the user and redirects to their show page' do 
+        post :create, user: { username: "julia", password: 'password' }
+        #create user = for julia
+        expect(response).to redirect_to(user_url(User.find_by(username: "julia")))
+        expect(session[:session_token]).to eq(user.session_token)
+      end
+    end
   end
 end
