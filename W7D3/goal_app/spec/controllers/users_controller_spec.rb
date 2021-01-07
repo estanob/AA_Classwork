@@ -52,10 +52,19 @@ RSpec.describe UsersController, type: :controller do
   describe 'POST #create' do
     context 'when given valid params' do 
       it 'logs in the user and redirects to their show page' do 
-        post :create, user: { username: "julia", password: 'password' }
+        post :create, params: {user: { username: "julia", password: 'password' }}
         #create user = for julia
-        expect(response).to redirect_to(user_url(User.find_by(username: "julia")))
+        user = User.find_by(username: "julia")
+        expect(response).to redirect_to(user_url(user))
         expect(session[:session_token]).to eq(user.session_token)
+      end
+    end
+
+    context 'when given invalid params' do
+      it 'validates the presence of password and renders the new template with errors' do
+        post :create, params: {user: { username: "julia", password: '' }}
+        expect(response).to render_template(:new)
+        expect(flash[:errors]).to be_present
       end
     end
   end
