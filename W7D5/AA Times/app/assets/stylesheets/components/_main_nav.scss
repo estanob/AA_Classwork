@@ -29,6 +29,7 @@
   span {
     margin-left: 10px;
   }
+   
 }
 
 .right-nav  {
@@ -53,6 +54,21 @@
 .left-nav > ul > li:hover,
 .right-nav > ul > li:last-of-type:hover {
   background-color: $lightest-gray;
+
 }
 
+@media all and (max-width: 1000px) {
+    .right-nav{
+      button{
+        display: none;
+      }
+    }
+
+    .left-nav >ul >li {
+      margin: 0;
+    }
+    .main_nav{
+      padding: 15px 0px;
+    }
+  }
 
