@@ -20,11 +20,16 @@ Array.prototype.myMap = function(cb){
     return mapped;
 }
  
-const arr = [4, 5, 6]
+//const arr = [4, 5, 6]
 
-let addTwo = function (num) {
-    console.log(num + 2);
-}
+// let addTwo = function (num) {
+//     console.log(num + 2);
+// }
 
 // console.log(arr.myMap(addTwo));
-console.log(arr.myMap(ele => ele + 2));
+//console.log(arr.myMap(ele => ele + 2));
+
+
+Array.prototype.myReduce = function(cb,) {
+
+}
