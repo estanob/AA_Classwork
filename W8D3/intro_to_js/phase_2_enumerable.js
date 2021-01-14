@@ -30,12 +30,25 @@ Array.prototype.myMap = function(cb){
 //console.log(arr.myMap(ele => ele + 2));
 
 
+
+
+
+
+
 Array.prototype.myReduce = function(cb, acc) {
 
     if (acc === undefined) {
         acc = this[0]
+        this.shift(acc)
     }
 
-    this.myEach(ele)
+    let new_acc = acc
+
+    this.myEach(ele => new_acc = cb(new_acc, ele)) 
+    
+    return new_acc;
 
 }
+
+const arr = [4, 5, 6]
+console.log(arr.myReduce((accedCB, accelerator) => accedCB + accelerator));
