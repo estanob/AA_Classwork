@@ -30,6 +30,12 @@ Array.prototype.myMap = function(cb){
 //console.log(arr.myMap(ele => ele + 2));
 
 
-Array.prototype.myReduce = function(cb,) {
+Array.prototype.myReduce = function(cb, acc) {
+
+    if (acc === undefined) {
+        acc = this[0]
+    }
+
+    this.myEach(ele)
 
 }
