@@ -12,4 +12,20 @@ Array.prototype.bubbleSort = function(){
   return this;
 }
 
-console.log([8, 3, 2, 0, 7].bubbleSort());
+//console.log([8, 3, 2, 0, 7].bubbleSort());
+
+String.prototype.subStrings = function(){
+
+  let subs = [];
+
+  for (let start = 0; start <= this.length - 1; start++){
+    for (let end = start + 1; end <= this.length; end++){
+      subs.push(this.slice(start, end))
+    }
+  }
+  return subs
+}
+
+console.log("hello".subStrings())
+
+
