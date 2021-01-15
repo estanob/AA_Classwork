@@ -101,19 +101,28 @@ Board.prototype.isOccupied = function (pos) {
 
 
 //  Solve this recursively!!!!!!!!!!
-Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
-  
+Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip=[]){
+
+
   let nextPos = [pos[0] + dir[0], pos[1] + dir[1]];
-  if (!this.isOccupied(nextPos) || !this.isValidPos(nextPos)){
+
+  if (!this.isValidPos(nextPos)) {
     return [];
-  } else {
-    if (!this.isMine(nextPos, color)){
-      piecesToFlip.push(nextPos);
-      return this._positionsToFlip(nextPos, color, dir, piecesToFlip);
+  } else{
+    if (!this.isOccupied(nextPos)){
+      return [];
     } else {
-      return piecesToFlip;
+      if (!this.isMine(nextPos, color)){
+        piecesToFlip.push(nextPos);
+        return this._positionsToFlip(nextPos, color, dir, piecesToFlip);
+      } else {
+        return piecesToFlip;
+      }
     }
+
   }
+
+
   
   
   
