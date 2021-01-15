@@ -1,29 +1,58 @@
 class Clock {
   constructor() {
-    // 1. Create a Date object.
-    // 2. Store the hours, minutes, and seconds.
+    // 1. Create a Date object. +
+    // 2. Store the hours, minutes, and seconds. +
     // 3. Call printTime.
     // 4. Schedule the tick at 1 second intervals.
     let date = new Date();
-    let h = date.getHours();
-    let m = date.getMinutes();
-    let s = date.getSeconds();
-    // let [HH, MM, SS] = new Date().toLocaleTimeString("en-US").split(/:|/)
-    this.printTime(h, m, s);
-    this._tick()
+    this.h = date.getHours();
+    this.m = date.getMinutes();
+    this.s = date.getSeconds();
+    // console.log(this)
+    this._tick();
+    this.printTime();
+    setInterval(this._tick.bind(this), 1000);
+    
   }
 
-  printTime(h, m, s) {
+  printTime() {
     // Format the time in HH:MM:SS
     // Use console.log to print it.
-    console.log(h, m, s);
+    
+    console.log(this.h + ":" + this.m + ":" + this.s);
   }
-
+  
   _tick() {
     // 1. Increment the time by one second.
     // 2. Call printTime.
-    setInterval(this.printTime, 1000)
+    // console.log(this)
+    if (this.s === 59){
+      this.s = 0;
+      this.m++;
+    } 
+    if (this.m === 59){
+      this.m = 0;
+      this.h++;
+    }
+    if (this.h === 23){
+      this.h = 0;
+    }
+
+    this.s++;
+    this.printTime(this.h, this.m, this.s);
+
   }
 }
 
-const clock = new Clock();
+// const clock = new Clock();
+
+
+const readline = require('readline');
+const reader = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+function addNumber(sum, numsLeft, completionCallback) {
+  
+}
