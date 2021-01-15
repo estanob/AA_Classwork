@@ -102,7 +102,23 @@ Board.prototype.isOccupied = function (pos) {
 
 //  Solve this recursively!!!!!!!!!!
 Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
-  piecesToFlip = [];
+  
+  let nextPos = [pos[0] + dir[0], pos[1] + dir[1]];
+  if (!this.isOccupied(nextPos) || !this.isValidPos(nextPos)){
+    return [];
+  } else {
+    if (!this.isMine(nextPos, color)){
+      piecesToFlip.push(nextPos);
+      return this._positionsToFlip(nextPos, color, dir, piecesToFlip);
+    } else {
+      return piecesToFlip;
+    }
+  }
+  
+  
+  
+  // iterative version:
+  /** piecesToFlip = [];
   let nextPos = [pos[0] + dir[0], pos[1] + dir[1]];
 
   // //  until one of the following conditions is met
@@ -133,6 +149,7 @@ Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
     }
   }
   return []
+  **/
 
 };
 
