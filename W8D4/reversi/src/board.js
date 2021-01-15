@@ -168,8 +168,8 @@ Board.prototype.validMove = function (pos, color) {
   return true;
 };
 
-let board = new Board;
-console.log(board.validMove([5, 3], 'white'));
+// let board = new Board;
+// console.log(board.validMove([5, 3], 'white'));
 
 
 /**
@@ -179,14 +179,11 @@ console.log(board.validMove([5, 3], 'white'));
  * Throws an error if the position represents an invalid move.
  */
 Board.prototype.placePiece = function (pos, color) {
-  // if (this.validMove(pos, color)) {
-  //   this.grid[pos[0]][[pos[1]]] = new Piece(color)
-  // }
-
-
-
-
-
+  if (this.validMove(pos, color)) {
+    this.grid[pos[0]][[pos[1]]] = new Piece(color);
+  } else {
+    throw new Error("Invalid move!");
+  }
 
 };
 
