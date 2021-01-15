@@ -54,5 +54,21 @@ const reader = readline.createInterface({
 })
 
 function addNumber(sum, numsLeft, completionCallback) {
-  
+  let userNumbers;
+  if (numsLeft > 0){
+    reader.question("Please enter some numbers", (res) => {
+      userNumbers = parseInt(res);
+      completionCallback(sum, userNumbers)
+      numsLeft--;
+    })
+  } else {
+    completionCallback(sum)
+  }
 }
+
+function completionCallback(sum, num) {
+  sum += num
+  console.log(sum);
+}
+
+addNumber(1, 3, completionCallback)
