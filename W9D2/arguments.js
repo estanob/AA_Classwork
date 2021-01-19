@@ -1,18 +1,18 @@
-function sum() {
-  let sum = 0
-  for (let i = 0; i < arguments.length; i++) {
-    sum += arguments[i];
-  }
-  return sum;
-}
+// function sum() {
+//   let sum = 0
+//   for (let i = 0; i < arguments.length; i++) {
+//     sum += arguments[i];
+//   }
+//   return sum;
+// }
 
-function sum2(...nums) {
-  let sum = 0
-  for (let i = 0; i < nums.length; i++) {
-    sum += nums[i];
-  }
-  return sum;
-}
+// function sum2(...nums) {
+//   let sum = 0
+//   for (let i = 0; i < nums.length; i++) {
+//     sum += nums[i];
+//   }
+//   return sum;
+// }
 
 
 Function.prototype.myBind1 = function(ctx) {
@@ -78,3 +78,23 @@ class Dog {
 // // true
 
 
+function curriedSum(numArgs){
+  let numbers = [];
+  function _curriedSum(num){
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      let sum1 = 0;
+      for (let i = 0; i < numbers.length; i++) {
+        sum1 += numbers[i];
+      }
+      return sum1;
+    } else {
+      return _curriedSum; //uninvoked 
+    }
+  }
+  return _curriedSum;
+}
+
+const sum = curriedSum(4); // sum is an uninvoked function
+console.log(sum);
+console.log(sum(5)(30)(20)(1)); // => 56
