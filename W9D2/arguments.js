@@ -98,3 +98,38 @@ function curriedSum(numArgs){
 const sum = curriedSum(4); // sum is an uninvoked function
 console.log(sum);
 console.log(sum(5)(30)(20)(1)); // => 56
+
+
+
+Function.prototype.curry = function(numArgs) {
+  let numbers = [];
+  let that = this; // this referrs to function
+  function _curry(num){
+    numbers.push(num);
+    if (numbers.length === numArgs){
+      return that.apply(0,numbers) // context can be anything, 0, null
+    } else {
+      return _curry //function style instead of method style
+    }
+  }
+  return _curry
+}
+
+Function.prototype.curry1 = function(numArgs) {
+  let numbers = [];
+  let that = this;
+  function _curry(num) {
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      return that(...numbers) // context can be anything, 0, null
+    } else {
+      return _curry //function style instead of method style
+    }
+  }
+  return _curry
+}
+
+const print = function(...names){
+  console.log(names);
+}
+print.curry1(3)("joe")("ja")("jo")
