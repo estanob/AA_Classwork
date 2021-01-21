@@ -3,48 +3,53 @@ class View {
     this.game = game;
     this.$el = $el;
     this.setupBoard();
+    this.bindEvents();
   }
 
-  bindEvents() {}
+  bindEvents() {
+    this.$el.on("click", "li", (e) => {
+      const $sq = $(e.currentTarget);
+      this.makeMove($sq);
+    });
+  }
 
-  makeMove($square) {}
+  makeMove($square) {
+    const $pos = $square.data("pos");
+    const $curPlayer = this.game.currentPlayer;
+
+    try {
+      this.game.playMove($pos);
+    } catch (err) {
+      alert("Invalid move");
+      return;
+    }
+
+    $square.addClass($curPlayer);
+
+    if (this.game.isOver()) {
+      const winner = this.game.winner();
+
+      if (winner) {
+        const h1 = $("<h1>").text(`Congratulations! Player ${winner} has won!`);
+        this.$el.append(h1);
+      } else {
+        const h1 = $("<h1>").text("It's a draw!");
+        this.$el.append(h1);
+      }
+    }
+  }
 
   setupBoard() {
-    const $ul = $('<ul>');
+    const $ul = $("<ul>");
 
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        let $li = $('<li>').attr("pos", [i, j]);
+        let $li = $("<li>").data("pos", [i, j]);
         $ul.append($li);
       }
-    };
+    }
 
     this.$el.append($ul);
-
-
-    // for (let j = 0; j <= 3; j++) {
-    //   const $button = $("<button>").html("Exercise " + j);
-    //   $button.on("click", this["exercise" + j]);
-    //   this.$el.append($button);
-    // }
-
-    // for (let i = 0; i < 3; i++) {
-    //   this.addRow();
-    // }
-
-    // View.prototype.addRow = function () {
-    //   const rowIdx = this.$el.find(".row").length;
-    //   const $row = $("<ul>").addClass("row").addClass("group");
-    //   for (let colIdx = 0; colIdx < 20; colIdx++) {
-    //     const $square = $("<li>").addClass("square").attr("data-pos", [rowIdx, colIdx]);
-    //     $square.on("mouseenter", (e) => {
-    //       const $square = $(e.currentTarget);
-    //       $square.css("background-color", window._randomColorString());
-    //     });
-    //     $row.append($square);
-    //   }
-    //   this.$el.append($row);
-    // };
   }
 }
 
