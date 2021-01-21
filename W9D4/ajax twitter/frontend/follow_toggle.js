@@ -36,10 +36,8 @@ class FollowToggle {
     } else if (this.followState === "followed") {
       $.ajax({
         url: `/users/${this.userId}/follow`,
-        method: "POST",
-        data: {
-          _method: "DELETE"
-        },
+        method: "DELETE",
+        dataType: "JSON",
         success: res => this.handleSuccess(res),
         error: error => console.log(error)
       })
