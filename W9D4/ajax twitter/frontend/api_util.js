@@ -23,6 +23,13 @@ const APIUtil = {
                 error: error => reject(error)
             })
         })
+    },
+    searchUsers: queryVal => {
+        return $.ajax({
+            url: "/users/search",
+            method: "GET",
+            dataType: "JSON",
+        }) 
     }
 }
 
