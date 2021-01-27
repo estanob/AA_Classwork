@@ -4,7 +4,7 @@ class Clock extends React.Component {
     constructor(props) { // props lets us use this
         super(props)
         this.state = {
-            time: new Date(),
+            time: new Date(), // <= Date object, can call hours, minutes, seconds
         }
 
         this.tick = this.tick.bind(this) // <= can't use this without bind
@@ -17,7 +17,11 @@ class Clock extends React.Component {
     }
 
     render() {
-        return(<h1>Clock</h1>)
+        return(<div>
+                <h1>Clock</h1>
+                <p>{this.state.time.getHours()} : {this.state.time.getMinutes()} : {this.state.time.getSeconds()}</p>
+                <p>{this.state.time.toLocaleDateString()}</p>
+            </div>)
     }
 
 
