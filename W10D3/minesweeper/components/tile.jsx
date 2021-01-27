@@ -7,8 +7,11 @@ class Tile extends React.Component {
   }
 
   render() {
+    debugger
     return(
-      <p>T</p>
+      <div >
+        {}
+      </div>
     )
   }
 }
