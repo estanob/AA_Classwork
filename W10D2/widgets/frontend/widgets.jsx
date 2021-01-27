@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Clock from './clock';
 
 function Root() { // component/wrapper
-  return <div>Hello!</div>
+  return(<div><Clock/></div>);
 }
 
 
