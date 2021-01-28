@@ -4,8 +4,8 @@ module.exports = {
   context: __dirname,
   entry: './frontend/todo_redux.jsx',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: './dist/bundle.js'
+    path: path.resolve(__dirname),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
