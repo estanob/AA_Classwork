@@ -15,8 +15,8 @@ class Board extends React.Component {
       <div>
         <h2>T</h2>
         {this.props.board.grid.map((row, rowIdx) => {
-          return(<div class=row key={rowIdx}>{row.map((tile, tileIdx) => {
-            return <Tile class=tile key={tileIdx} tile={tile} updateGame={this.props.updateGame}/>
+          return(<div className="row" key={rowIdx}>{row.map((tile, tileIdx) => {
+            return <Tile key={tileIdx} tile={tile} updateGame={this.props.updateGame}/>
             // ^ key, title, updateGame are being passed in, only different syntax, no parentheses to pass in
           })}</div>)
         })}
