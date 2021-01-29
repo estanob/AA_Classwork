@@ -86,6 +86,45 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/step_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/step_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_STEPS, RECEIVE_STEP, REMOVE_STEP, receiveSteps, receiveStep, removeStep */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STEPS", function() { return RECEIVE_STEPS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STEP", function() { return RECEIVE_STEP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_STEP", function() { return REMOVE_STEP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSteps", function() { return receiveSteps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveStep", function() { return receiveStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeStep", function() { return removeStep; });
+var RECEIVE_STEPS = "RECEIVE_STEPS";
+var RECEIVE_STEP = "RECEIVE_STEP";
+var REMOVE_STEP = "REMOVE_STEP";
+var receiveSteps = function receiveSteps(steps) {
+  return {
+    type: RECEIVE_STEPS,
+    steps: steps
+  };
+};
+var receiveStep = function receiveStep(step) {
+  return {
+    type: RECEIVE_STEP,
+    step: step
+  };
+};
+var removeStep = function removeStep(step) {
+  return {
+    type: REMOVE_STEP,
+    step: step
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/todo_actions.js":
 /*!******************************************!*\
   !*** ./frontend/actions/todo_actions.js ***!
@@ -136,12 +175,72 @@ var removeTodo = function removeTodo(todo) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _todos_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todos_reducer */ "./frontend/reducers/todos_reducer.js");
+/* harmony import */ var _steps_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./steps_reducer */ "./frontend/reducers/steps_reducer.js");
+
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  todos: _todos_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  todos: _todos_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  steps: _steps_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/steps_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/steps_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_step_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/step_actions */ "./frontend/actions/step_actions.js");
+
+var initialState = {
+  1: {
+    // this is the step with id = 1
+    id: 1,
+    title: 'walk to store',
+    done: false,
+    todo_id: 1
+  },
+  2: {
+    // this is the step with id = 2
+    id: 2,
+    title: 'buy soap',
+    done: false,
+    todo_id: 1
+  }
+};
+
+var stepsReducer = function stepsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  var nextState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_step_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STEPS"]:
+      action.steps.forEach(function (step) {
+        nextState[step.id] = step;
+      });
+      return nextState;
+
+    case _actions_step_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STEP"]:
+      nextState[action.step.id] = action.step;
+      return nextState;
+
+    case _actions_step_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_STEP"]:
+      delete nextState[action.step.id];
+      return nextState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (stepsReducer);
 
 /***/ }),
 
@@ -169,32 +268,33 @@ var initialState = {
     body: "with shampoo",
     done: true
   }
-};
-var next = {};
+}; // let next = {};
 
 var todosReducer = function todosReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  var nextState = Object.assign({}, state);
 
   switch (action.type) {
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TODOS"]:
       action.todos.forEach(function (todo) {
-        next[todo.id] = todo;
+        nextState[todo.id] = todo;
       });
-      return next;
+      return nextState;
     //completely new todo list 
 
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_TODO"]:
-      var newTodo = {};
-      newTodo[action.todo.id] = action.todo;
-      return Object.assign({}, state, newTodo);
+      // let newTodo = {};
+      nextState[action.todo.id] = action.todo;
+      return nextState;
     // mutated NEW copy of original state
     // let newState = { [action.todo.id]: action.todo };
     //                    ^[] will create a key
     // let newState = { action.todo.id: action.todo };
 
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_TODO"]:
-      next = Object.assign({}, state);
+      delete nextState[action.todo.id];
+      return nextState;
 
     default:
       return state;
@@ -242,6 +342,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/todo_actions */ "./frontend/actions/todo_actions.js");
+/* harmony import */ var _actions_step_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/step_actions */ "./frontend/actions/step_actions.js");
+
 
 
 
@@ -250,8 +352,12 @@ document.addEventListener("DOMContentLoaded", function () {
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])();
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Todos App"), document.getElementById('content'));
   window.store = store;
-  window.receiveTodo = _actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["receiveTodo"];
   window.receiveTodos = _actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["receiveTodos"];
+  window.receiveTodo = _actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["receiveTodo"];
+  window.removeTodo = _actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["removeTodo"];
+  window.receiveSteps = _actions_step_actions__WEBPACK_IMPORTED_MODULE_4__["receiveSteps"];
+  window.receiveStep = _actions_step_actions__WEBPACK_IMPORTED_MODULE_4__["receiveStep"];
+  window.removeStep = _actions_step_actions__WEBPACK_IMPORTED_MODULE_4__["removeStep"];
 });
 
 /***/ }),

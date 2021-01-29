@@ -15,24 +15,26 @@ const initialState = {
     }
 };
 
-let next = {};
+// let next = {};
 
 const todosReducer = (state = initialState, action) => {
+    let nextState = Object.assign({}, state);
     switch (action.type) {
         case RECEIVE_TODOS:
             action.todos.forEach(todo => {
-                next[todo.id] = todo;
+                nextState[todo.id] = todo;
             });
-            return next; //completely new todo list 
+            return nextState; //completely new todo list 
         case RECEIVE_TODO:
-            let newTodo = {};
-            newTodo[action.todo.id] = action.todo;
-            return Object.assign({}, state, newTodo); // mutated NEW copy of original state
+            // let newTodo = {};
+            nextState[action.todo.id] = action.todo;
+            return nextState; // mutated NEW copy of original state
             // let newState = { [action.todo.id]: action.todo };
             //                    ^[] will create a key
             // let newState = { action.todo.id: action.todo };
         case REMOVE_TODO:
-            next = Object.assign({}, state)
+            delete nextState[action.todo.id];
+            return nextState;
         default:
             return state;
     }
