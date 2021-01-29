@@ -1,3 +1,3 @@
-export const allTodos = (todos) => {
+export const allTodos = ( state ) => {
   return Object.values(state.todos);
 };

@@ -7,6 +7,7 @@ import configureStore from './store/store';
 import { receiveTodo, receiveTodos, removeTodo } from './actions/todo_actions';
 import { receiveSteps, receiveStep, removeStep } from './actions/step_actions';
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const store = configureStore();
