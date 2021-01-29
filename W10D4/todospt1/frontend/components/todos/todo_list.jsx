@@ -1,5 +1,5 @@
 import React from 'react';
-
+import TodoListItem from "./todo_list_item";
 
 
 
@@ -8,12 +8,16 @@ import React from 'react';
 
 // export default TodoList;
 export default (props) => {
-    <div>
-        <h3>Todo List goes here!</h3>
+    const TodoListItems = props.todos.map(todo => {
+        return <TodoListItem todo={todo} />;
+    });
+    return(<div>
         <ul>
-            { props.todos.map ((todo) => {
-                <li key={todo.id}></li>
-            })}
+            {/* { props.todos.forEach ((todo) => {
+                debugger
+                <TodoListItem todo={todo}/>
+            })} */}
+            {TodoListItems}
         </ul>
-    </div>
+    </div>)
 }
