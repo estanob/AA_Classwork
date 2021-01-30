@@ -9,9 +9,9 @@ import TodoListItem from "./todo_list_item";
 // export default TodoList;
 export default (props) => {
     const TodoListItems = props.todos.map(todo => {
-        return <TodoListItem todo={todo} />;
+        return <TodoListItem key={todo.id} todo={todo} />;
     });
-    return(<div>
+    return (<div>
         <ul>
             {/* { props.todos.forEach ((todo) => {
                 debugger
