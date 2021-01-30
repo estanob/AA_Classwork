@@ -15,6 +15,7 @@ class TodoForm extends React.Component {
     } 
     handleSubmit(e) {
         e.preventDefault();
+        // debugger
         this.props.receiveTodo(this.state);
         this.setState({
             id: Math.floor(Math.random() * 1000),
@@ -36,9 +37,11 @@ class TodoForm extends React.Component {
                 <label>Title:
                     <input onChange={this.updateTitle} type="text" value={this.state.title}/>
                 </label>
+                <br></br>
                 <label>Body:
                     <input onChange={this.updateBody} type="text" value={this.state.body} />
                 </label>
+                <br></br>
                 <input type="submit" value="Add a new Todo!"/>
 
             </form>
