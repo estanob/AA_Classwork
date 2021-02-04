@@ -4,5 +4,5 @@ import sessionReducer from "./session";
 
 export default combineReducers({
   entities: entitiesReducer,
-  session: sessionReducer
+  session: sessionReducer,
 });
